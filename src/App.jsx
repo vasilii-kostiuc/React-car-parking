@@ -1,6 +1,53 @@
-import { Outlet, NavLink } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
+import NamedLink from '@/components/NamedLink'
+import { useAuth } from '@/hooks/useAuth'
  
 function App() {
+  const { isLoggedIn, logout } = useAuth()
+ 
+  window.axios.interceptors.response.use(
+    response => response,
+    error => {
+      if (error.response?.status === 401) logout(true)
+      return Promise.reject(error)
+    },
+  )
+ 
+  function leftGuestLinks() {
+    return <>
+      <NamedLink name="home">
+        Home
+      </NamedLink>
+    </>
+  }
+ 
+  function leftAuthLinks() {
+    return <>
+      <NamedLink name="vehicles.index">
+        Vehicles
+      </NamedLink>
+    </>
+  }
+ 
+  function rightGuestLinks() {
+    return <>
+      <NamedLink name="login">
+        Login
+      </NamedLink>
+      <NamedLink name="register">
+        Register
+      </NamedLink>
+    </>
+  }
+ 
+  function rightAuthLinks() {
+    return <>
+      <button onClick={ logout } type="button" className="text-blue-600">
+        Logout
+      </button>
+    </>
+  }
+ 
   return (
     <div className="App">
       <header className="py-6 bg-gray-100 shadow">
@@ -8,31 +55,17 @@ function App() {
           <nav className="flex gap-4 justify-between">
             <div className="flex gap-4 items-center">
               <h2 className="text-xl font-bold">
-                <div className="inline-flex items-center justify-center bg-blue-600 w-6 h-6 text-center text-white rounded mr-1">
+                <div
+                  className="inline-flex items-center justify-center bg-blue-600 w-6 h-6 text-center text-white rounded mr-1"
+                >
                   P
                 </div>
                 myParking
               </h2>
-              <NavLink
-                end
-                to="/"
-                className={({ isActive }) => {
-                  return isActive ? "text-blue-600 underline" : "text-blue-600";
-                }}
-              >
-                Home
-              </NavLink>
+              { isLoggedIn ? leftAuthLinks() : leftGuestLinks() }
             </div>
             <div className="flex gap-4 items-center">
-              <NavLink
-                end
-                to="/register"
-                className={({ isActive }) => {
-                  return isActive ? "text-blue-600 underline" : "text-blue-600";
-                }}
-              >
-                Register
-              </NavLink>
+              { isLoggedIn ? rightAuthLinks() : rightGuestLinks() }
             </div>
           </nav>
         </div>
@@ -41,7 +74,7 @@ function App() {
         <Outlet />
       </div>
     </div>
-  );
+  )
 }
  
 export default App

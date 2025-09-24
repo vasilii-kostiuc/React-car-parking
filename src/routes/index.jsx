@@ -1,7 +1,12 @@
 const routeNames = {
-  'home': '/',
-  'register': '/register',
-}
+  home: "/",
+  register: "/register",
+  login: "/login",
+  "vehicles.index": "/vehicles",
+  "vehicles.show": "/vehicles/:id",
+  "vehicles.create": "/vehicles/create",
+  "vehicles.edit": "/vehicles/:id/edit",
+};
  
 function route(name, params = {}) {
   let url = routeNames[name]
