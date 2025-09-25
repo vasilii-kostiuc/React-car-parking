@@ -44,7 +44,10 @@ function leftAuthLinks() {
   }
  
   function rightAuthLinks() {
-    return <>
+ return <>
+      <NamedLink name="profile.edit">
+        Profile
+      </NamedLink>
       <button onClick={ logout } type="button" className="text-blue-600">
         Logout
       </button>

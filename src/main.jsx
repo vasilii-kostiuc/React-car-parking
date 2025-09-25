@@ -5,6 +5,7 @@ import App from '@/App'
 import Home from '@/views/Home'
 import Register from '@/views/auth/Register'
 import Login from '@/views/auth/Login'
+import EditProfile from '@/views/profile/EditProfile'
 import '@/assets/main.css'
 import { route } from '@/routes'
 import VehiclesList from '@/views/vehicles/VehiclesList'
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path={route("login")} element={<Login />} />
           <Route path={route("vehicles.index")} element={<VehiclesList />} />
           <Route path={ route('parkings.active') } element={<ActiveParkings />} />
+          <Route path={ route('profile.edit') } element={<EditProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>
