@@ -16,6 +16,7 @@ export function useAuth() {
       window.axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
     }
   }, [accessToken])
+  
   async function register(data) {
     setErrors({});
     setLoading(true);
@@ -35,8 +36,24 @@ export function useAuth() {
       .finally(() => setLoading(false));
   }
 
+  async function login(data) {
+  setErrors({})
+  setLoading(true)
+ 
+  return window.axios.post('Auth/login', data)
+    .then(response => {
+      setAccessToken(response.data.accessToken)
+      navigate(route('parkings.active'))
+    })
+    .catch(error => {
+      if (error.response.status === 400) {
+        setErrors(error.response.data.errors)
+      }
+    })
+    .finally(() => setLoading(false))
+}
 
-   async function logout(force = false) {
+  async function logout(force = false) {
     if (!force) {
       await window.axios.post('Auth/logout')
     }
@@ -45,5 +62,5 @@ export function useAuth() {
     navigate(route('login'))
   }
 
-  return { register, errors, loading, isLoggedIn, logout };
+  return { register, errors, loading, isLoggedIn, login, logout };
 }

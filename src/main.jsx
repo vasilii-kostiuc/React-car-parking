@@ -9,6 +9,7 @@ import '@/assets/main.css'
 import { route } from '@/routes'
 import VehiclesList from '@/views/vehicles/VehiclesList'
 import axios from "axios";
+import ActiveParkings from '@/views/parkings/ActiveParkings'
 
 window.axios = axios;
  
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path={route("register")} element={<Register />} />
           <Route path={route("login")} element={<Login />} />
           <Route path={route("vehicles.index")} element={<VehiclesList />} />
+          <Route path={ route('parkings.active') } element={<ActiveParkings />} />
         </Route>
       </Routes>
     </BrowserRouter>

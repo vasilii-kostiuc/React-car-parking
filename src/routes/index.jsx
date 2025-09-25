@@ -6,6 +6,7 @@ const routeNames = {
   "vehicles.show": "/vehicles/:id",
   "vehicles.create": "/vehicles/create",
   "vehicles.edit": "/vehicles/:id/edit",
+  "parkings.active": "/parkings/active",
 };
  
 function route(name, params = {}) {

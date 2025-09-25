@@ -21,13 +21,16 @@ function App() {
     </>
   }
  
-  function leftAuthLinks() {
-    return <>
-      <NamedLink name="vehicles.index">
-        Vehicles
-      </NamedLink>
-    </>
-  }
+function leftAuthLinks() {
+  return <>
+    <NamedLink name="parkings.active">
+      Parkings
+    </NamedLink>
+    <NamedLink name="vehicles.index">
+      Vehicles
+    </NamedLink>
+  </>
+}
  
   function rightGuestLinks() {
     return <>
