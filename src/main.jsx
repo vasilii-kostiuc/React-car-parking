@@ -13,9 +13,10 @@ import CreateVehicle from '@/views/vehicles/CreateVehicle'
 import EditVehicle from '@/views/vehicles/EditVehicle'
 import axios from "axios";
 import ActiveParkings from '@/views/parkings/ActiveParkings'
+import OrderParking from '@/views/parkings/OrderParking'
 
 window.axios = axios;
- 
+
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 window.axios.defaults.withCredentials = true;
 window.axios.defaults.baseURL = "https://localhost:7041/api";
@@ -29,11 +30,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path={route("register")} element={<Register />} />
           <Route path={route("login")} element={<Login />} />
           <Route path={route("vehicles.index")} element={<VehiclesList />} />
-          <Route path={ route('parkings.active') } element={<ActiveParkings />} />
-          <Route path={ route('profile.edit') } element={<EditProfile />} />
-          <Route path={ route('vehicles.create') } element={<CreateVehicle />} />
-           <Route path={ route('vehicles.edit') } element={<EditVehicle />} />
-
+          <Route path={route('parkings.active')} element={<ActiveParkings />} />
+          <Route path={route('profile.edit')} element={<EditProfile />} />
+          <Route path={route('vehicles.create')} element={<CreateVehicle />} />
+          <Route path={route('vehicles.edit')} element={<EditVehicle />} />
+          <Route path={route('parkings.create')} element={<OrderParking />} />
         </Route>
       </Routes>
     </BrowserRouter>
