@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom'
 import NamedLink from '@/components/NamedLink'
 import { useAuth } from '@/hooks/useAuth'
- 
+
 function App() {
   const { isLoggedIn, logout } = useAuth()
- 
+
   window.axios.interceptors.response.use(
     response => response,
     error => {
@@ -12,7 +12,7 @@ function App() {
       return Promise.reject(error)
     },
   )
- 
+
   function leftGuestLinks() {
     return <>
       <NamedLink name="home">
@@ -20,18 +20,21 @@ function App() {
       </NamedLink>
     </>
   }
- 
-function leftAuthLinks() {
-  return <>
-    <NamedLink name="parkings.active">
-      Parkings
-    </NamedLink>
-    <NamedLink name="vehicles.index">
-      Vehicles
-    </NamedLink>
-  </>
-}
- 
+
+  function leftAuthLinks() {
+    return <>
+      <NamedLink name="parkings.active">
+        Parkings
+      </NamedLink>
+      <NamedLink name="vehicles.index">
+        Vehicles
+      </NamedLink>
+      <NamedLink name="parkings.history">
+        History
+      </NamedLink>
+    </>
+  }
+
   function rightGuestLinks() {
     return <>
       <NamedLink name="login">
@@ -42,18 +45,18 @@ function leftAuthLinks() {
       </NamedLink>
     </>
   }
- 
+
   function rightAuthLinks() {
- return <>
+    return <>
       <NamedLink name="profile.edit">
         Profile
       </NamedLink>
-      <button onClick={ logout } type="button" className="text-blue-600">
+      <button onClick={logout} type="button" className="text-blue-600">
         Logout
       </button>
     </>
   }
- 
+
   return (
     <div className="App">
       <header className="py-6 bg-gray-100 shadow">
@@ -68,10 +71,10 @@ function leftAuthLinks() {
                 </div>
                 myParking
               </h2>
-              { isLoggedIn ? leftAuthLinks() : leftGuestLinks() }
+              {isLoggedIn ? leftAuthLinks() : leftGuestLinks()}
             </div>
             <div className="flex gap-4 items-center">
-              { isLoggedIn ? rightAuthLinks() : rightGuestLinks() }
+              {isLoggedIn ? rightAuthLinks() : rightGuestLinks()}
             </div>
           </nav>
         </div>
@@ -82,5 +85,5 @@ function leftAuthLinks() {
     </div>
   )
 }
- 
+
 export default App
